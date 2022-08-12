@@ -1,4 +1,4 @@
-import { Model, DocumentQuery, Document } from 'mongoose';
+import { Model, Document, Query } from 'mongoose';
 import { Request, Response, Router } from 'express';
 
 export = Resource;
@@ -15,7 +15,7 @@ declare class Resource<DocType extends Document> {
     listResponse(req:Request,res:Response,objs:any[],postMapper?:Resource.POST_MAPPER,next?:Resource.NEXT):void;
     relListResponse(req:Request,res:Response,objs:any[],postMapper?:Resource.POST_MAPPER,next?:Resource.NEXT):void;
 
-    initQuery(query:DocumentQuery<DocType[],DocType>|DocumentQuery<DocType,DocType>,req:Request):DocumentQuery<DocType[],DocType>|DocumentQuery<DocType,DocType>;
+    initQuery(query:Query<DocType[],DocType>|Query<DocType,DocType>,req:Request):Query<DocType[],DocType>|Query<DocType,DocType>;
 
     getMapper(postMapper?:Resource.POST_MAPPER):Resource.POST_MAPPER;
 
@@ -32,7 +32,7 @@ declare class Resource<DocType extends Document> {
     initRouter(app:any):Router;
 
     static sendError(res:Response,rc:number,message:string,err?:any):void;
-    static parseFilter(query:DocumentQuery<any,any>,filter:string):void;
+    static parseFilter(query:Query<any,any>,filter:string):void;
 }
 
 declare namespace Resource {
